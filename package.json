@@ -1,18 +1,21 @@
 {
   "name": "exercise-frontend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.html",
   "repository": "https://github.com/VICEMedia/exercise-frontend",
   "author": "VICE Engineering <engineering@vice.com>",
   "license": "MIT",
   "scripts": {
+    "start": "parcel serve ./index.html",
+    "build": "parcel build ./index.html",
     "start-api": "json-server --watch shows.json"
   },
   "dependencies": {
-    "json-server": "0.16.1"
+    "json-server": "0.16.1",
+    "parcel": "^2.0.0-beta.2"
   },
   "engines": {
-    "node": "12.14.1",
+    "node": "12.18.3",
     "npm": "6.13.6"
   }
 }

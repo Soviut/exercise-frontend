@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    ports:
+      - 1234:1234
+    volumes:
+      - .:/src
+      - /src/node_modules
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/src
+      - /src/node_modules
+    command: yarn run start-api -- --host 0.0.0.0
