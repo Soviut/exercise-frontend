@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
+import ForkTsCheckerPlugin from 'fork-ts-checker-webpack-plugin';
 // const CopyPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -43,6 +44,9 @@ module.exports = {
   plugins: [
     new HtmlPlugin({
       template: 'index.html',
+    }),
+    new ForkTsCheckerPlugin({
+      async: false
     }),
     // new CopyPlugin({
     //   patterns: [
