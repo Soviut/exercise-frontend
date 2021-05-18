@@ -1,4 +1,4 @@
-interface Show {
+type Show = {
   id: string
   title: string
   episodes: number

@@ -11,11 +11,11 @@ export default ({ show, className }: ShowPosterProps) => {
       <img src={show.productImageUrl} className="w-full" />
 
       <figcaption className="text-center">
-        <div className="text-xs font-bold uppercase text-gray-400">
+        <div role="episodes" className="text-xs font-bold uppercase text-gray-400">
           {show.episodes} Episodes
         </div>
 
-        <h2 className="text-xl font-bold uppercase">
+        <h2 role="title" className="text-xl font-bold uppercase">
           {show.title}
         </h2>
       </figcaption>
