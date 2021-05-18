@@ -22,6 +22,7 @@ export default () => {
 
         // normalize JSON snake case to camel case to avoid mixing styles
         const data = camelcase(res.data)
+        console.log(data)
 
         setShows(data)
         setCurrentShow(data.find((show) => show.id === id))
@@ -38,7 +39,7 @@ export default () => {
       <nav className="shadow overflow-x-auto">
         {currentShow &&
           <ul className="flex justify-center flex-nowrap space-x-8">
-            {shows.map((show, i) => (
+            {shows.map((show) => (
               <li key={show.id}>
                 <Link
                   to={{ pathname: show.id }}
@@ -54,7 +55,7 @@ export default () => {
 
                 {show.id === currentShow.id &&
                   <div className="text-center">
-                    {i + 1}
+                    {show.episodes}
                   </div>
                 }
               </li>
