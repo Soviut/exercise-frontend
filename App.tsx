@@ -13,9 +13,9 @@ export default () => {
         </nav>
       </header>
 
-      <div className="container mx-auto">
+      <main className="container mx-auto">
         <HomePage />
-      </div>
+      </main>
     </div>
   )
 }
