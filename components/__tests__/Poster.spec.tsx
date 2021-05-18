@@ -13,18 +13,14 @@ describe('Poster component', () => {
   }
 
   it('should display show details', () => {
-    const component = shallow(
-      <Poster show={show} />
-    )
+    const component = shallow(<Poster show={show} />)
 
     expect(component.find('[role="episodes"]').text()).toEqual('5 Episodes')
     expect(component.find('[role="title"]').text()).toEqual('show title')
   })
 
   it('should pass classes', () => {
-    const component = shallow(
-      <Poster show={show} className="ding" />
-    )
+    const component = shallow(<Poster show={show} className="ding" />)
 
     expect(component.hasClass('ding')).toEqual(true)
   })

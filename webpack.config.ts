@@ -1,9 +1,8 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlPlugin = require('html-webpack-plugin')
-const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin')
-const ESLintPlugin = require('eslint-webpack-plugin')
-// const CopyPlugin = require('html-webpack-plugin')
+import webpack from 'webpack'
+import HtmlPlugin from 'html-webpack-plugin'
+import ForkTsCheckerPlugin from 'fork-ts-checker-webpack-plugin'
+import ESLintPlugin from 'eslint-webpack-plugin'
+// import CopyPlugin from 'html-webpack-plugin'
 
 module.exports = {
   mode: 'development',
@@ -47,7 +46,7 @@ module.exports = {
       template: 'index.html',
     }),
     new ForkTsCheckerPlugin({
-      async: false
+      async: false,
     }),
     new ESLintPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx'],
@@ -69,6 +68,6 @@ module.exports = {
     // contentBase: path.join(__dirname, 'build'),
     historyApiFallback: true,
     port: 4000,
-    hot: true
+    hot: true,
   },
 }

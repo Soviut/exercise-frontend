@@ -7,13 +7,19 @@ interface ShowPosterProps {
   className?: string
 }
 
-export default function Poster({ show, className }: ShowPosterProps): JSX.Element {
+export default function Poster({
+  show,
+  className,
+}: ShowPosterProps): JSX.Element {
   return (
     <figure className={className}>
       <img src={show.productImageUrl} className="w-full" />
 
       <figcaption className="text-center">
-        <div role="episodes" className="text-xs font-bold uppercase text-gray-400">
+        <div
+          role="episodes"
+          className="text-xs font-bold uppercase text-gray-400"
+        >
           {show.episodes} Episodes
         </div>
 

@@ -13,9 +13,7 @@ export default function App(): JSX.Element {
     <Router>
       <div>
         <header>
-          <nav>
-            {/* TODO: put branding and nav here */}
-          </nav>
+          <nav>{/* TODO: put branding and nav here */}</nav>
         </header>
 
         <main className="container mx-auto">
