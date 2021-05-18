@@ -24,7 +24,7 @@ export default () => {
               <Redirect to="/gallery" />
             </Route>
 
-            <Route path="/gallery">
+            <Route path="/gallery/:id?">
               <GalleryPage />
             </Route>
           </Switch>

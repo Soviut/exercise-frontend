@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import camelcase from 'camelcase-keys'
 import classNames from 'classnames'
@@ -8,6 +9,8 @@ export default () => {
   const [shows, setShows] = useState([])
   const [currentShow, setCurrentShow] = useState(null)
 
+  const { id }: { id: string | undefined } = useParams()
+
   // TODO: refactor to use suspense once out of beta
   useEffect(
     () => {
@@ -15,23 +18,18 @@ export default () => {
         setLoading(true)
 
         // TODO: centralize axios config for base url
-        const res = await axios(
-          'http://localhost:3000/shows'
-        )
+        const res = await axios('http://localhost:3000/shows')
 
         // normalize JSON snake case to camel case to avoid mixing styles
         const data = camelcase(res.data)
 
         setShows(data)
-        console.log(data)
-
-        // TODO: use query param
-        setCurrentShow(data[0])
+        setCurrentShow(data.find((show) => show.id === id))
 
         setLoading(false)
       })()
     },
-    [],
+    [id],
   )
 
   return (
@@ -42,8 +40,8 @@ export default () => {
           <ul className="flex justify-center flex-nowrap space-x-8">
             {shows.map((show, i) => (
               <li key={show.id}>
-                <a
-                  href="#"
+                <Link
+                  to={{ pathname: show.id }}
                   className={classNames(
                     'block flex-shrink-0 w-16 h-16',
                     show.id === currentShow.id ? 'bg-black' : 'bg-gray-200',
@@ -52,7 +50,7 @@ export default () => {
                   <span className="sr-only">
                     {show.title}
                   </span>
-                </a>
+                </Link>
 
                 {show.id === currentShow.id &&
                   <div className="text-center">
@@ -68,7 +66,6 @@ export default () => {
       <section>
         {currentShow &&
           <figure>
-            {currentShow.productImageUrl}
             <img src={currentShow.productImageUrl} />
 
             <figcaption>
