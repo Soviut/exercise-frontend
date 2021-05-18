@@ -3,11 +3,12 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import camelcase from 'camelcase-keys'
 import classNames from 'classnames'
+import ShowPoster from '../../components/Poster'
 
 export default () => {
   const [loading, setLoading] = useState(false)
-  const [shows, setShows] = useState([])
-  const [currentShow, setCurrentShow] = useState(null)
+  const [shows, setShows] = useState<Show[]>([])
+  const [currentShow, setCurrentShow] = useState<Show | undefined>()
 
   const { id }: { id: string | undefined } = useParams()
 
@@ -21,11 +22,11 @@ export default () => {
         const res = await axios('http://localhost:3000/shows')
 
         // normalize JSON snake case to camel case to avoid mixing styles
-        const data = camelcase(res.data)
+        const data: Show[] = camelcase(res.data)
         console.log(data)
 
         setShows(data)
-        setCurrentShow(data.find((show) => show.id === id))
+        setCurrentShow(data.find((show: Show) => show.id === id))
 
         setLoading(false)
       })()
@@ -66,19 +67,7 @@ export default () => {
 
       <section>
         {currentShow &&
-          <figure className="w-72 mx-auto">
-            <img src={currentShow.productImageUrl} className="w-full" />
-
-            <figcaption className="text-center">
-              <div className="text-xs font-bold uppercase text-gray-400">
-                {currentShow.episodes} Episodes
-              </div>
-
-              <h2 className="text-xl font-bold uppercase">
-                {currentShow.title}
-              </h2>
-            </figcaption>
-          </figure>
+          <ShowPoster show={currentShow} className="w-72 mx-auto" />
         }
       </section>
     </div>
