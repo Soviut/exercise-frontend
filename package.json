@@ -6,7 +6,7 @@
   "author": "VICE Engineering <engineering@vice.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack serve --config webpack.config.js",
+    "start": "NODE_ENV=development webpack serve --config webpack.config.js",
     "build": "webpack build --mode production --config webpack.config.js",
     "start-api": "json-server --watch shows.json"
   },
@@ -52,7 +52,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "engines": {
-    "node": "12.18.3",
+    "node": "12.14.1",
     "npm": "6.13.6"
   }
 }
