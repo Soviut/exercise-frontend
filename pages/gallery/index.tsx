@@ -66,15 +66,15 @@ export default () => {
 
       <section>
         {currentShow &&
-          <figure className="w-72">
+          <figure className="w-72 mx-auto">
             <img src={currentShow.productImageUrl} className="w-full" />
 
-            <figcaption>
-              <div>
+            <figcaption className="text-center">
+              <div className="text-xs font-bold uppercase text-gray-400">
                 {currentShow.episodes} Episodes
               </div>
 
-              <h2 className="text-md font-bold">
+              <h2 className="text-xl font-bold uppercase">
                 {currentShow.title}
               </h2>
             </figcaption>
