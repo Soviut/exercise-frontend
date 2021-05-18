@@ -26,13 +26,17 @@ export default () => {
 
   return (
     <div>
-      <ul>
-        {shows.map((show) => (
-          <li key={show.id}>
-            {show.title}
-          </li>
-        ))}
-      </ul>
+      <nav className="border-b overflow-x-auto">
+        <ul className="flex justify-center flex-nowrap space-x-8">
+          {shows.map((show) => (
+            <li key={show.id} className="flex-shrink-0 w-10 h-10 bg-gray-200">
+              <span className="sr-only">
+                {show.title}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   )
 }
