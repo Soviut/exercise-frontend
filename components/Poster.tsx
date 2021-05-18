@@ -7,7 +7,7 @@ interface ShowPosterProps {
   className?: string
 }
 
-export default ({ show, className }: ShowPosterProps) => {
+export default function Poster({ show, className }: ShowPosterProps): JSX.Element {
   return (
     <figure className={className}>
       <img src={show.productImageUrl} className="w-full" />

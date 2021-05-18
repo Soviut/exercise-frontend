@@ -1,7 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
-import ForkTsCheckerPlugin from 'fork-ts-checker-webpack-plugin';
+const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
 // const CopyPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -47,6 +48,9 @@ module.exports = {
     }),
     new ForkTsCheckerPlugin({
       async: false
+    }),
+    new ESLintPlugin({
+      extensions: ['js', 'jsx', 'ts', 'tsx'],
     }),
     // new CopyPlugin({
     //   patterns: [

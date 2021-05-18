@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import ShowPoster from '../../components/Poster'
 import { Show } from '../../types'
 
-export default () => {
+export default function ShowsPage(): JSX.Element {
   const [loading, setLoading] = useState(false)
   const [shows, setShows] = useState<Show[]>([])
   const [currentShow, setCurrentShow] = useState<Show | undefined>()

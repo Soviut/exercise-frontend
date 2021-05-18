@@ -8,7 +8,7 @@ import {
 
 import ShowsPage from './pages/shows'
 
-export default () => {
+export default function App(): JSX.Element {
   return (
     <Router>
       <div>
