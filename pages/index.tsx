@@ -36,20 +36,29 @@ export default () => {
 
   return (
     <div>
+      {/* TODO: turn this into a component if used more than once in future */}
       <nav className="shadow overflow-x-auto">
         {currentShow &&
           <ul className="flex justify-center flex-nowrap space-x-8">
-            {shows.map((show) => (
-              <li
-                key={show.id}
-                className={classNames(
-                  'flex-shrink-0 w-16 h-16',
-                  show.id === currentShow.id ? 'bg-black' : 'bg-gray-200',
-                )}
-              >
-                <span className="sr-only">
-                  {show.title}
-                </span>
+            {shows.map((show, i) => (
+              <li key={show.id}>
+                <a
+                  href="#"
+                  className={classNames(
+                    'block flex-shrink-0 w-16 h-16',
+                    show.id === currentShow.id ? 'bg-black' : 'bg-gray-200',
+                  )}
+                >
+                  <span className="sr-only">
+                    {show.title}
+                  </span>
+                </a>
+
+                {show.id === currentShow.id &&
+                  <div className="text-center">
+                    {i + 1}
+                  </div>
+                }
               </li>
             ))}
           </ul>
@@ -59,10 +68,13 @@ export default () => {
       <section>
         {currentShow &&
           <figure>
-            <img src={currentShow.product_image_url} />
+            {currentShow.productImageUrl}
+            <img src={currentShow.productImageUrl} />
 
             <figcaption>
-              caption
+              <h2 className="text-md font-bold">
+                {currentShow.title}
+              </h2>
             </figcaption>
           </figure>
         }
