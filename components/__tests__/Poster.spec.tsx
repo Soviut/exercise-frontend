@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import { Show } from '../../types'
 
 import Poster from '../Poster'
 

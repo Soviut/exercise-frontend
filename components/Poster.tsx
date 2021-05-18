@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Show } from '../types'
+
 interface ShowPosterProps {
   show: Show
   className?: string

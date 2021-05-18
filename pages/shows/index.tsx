@@ -4,6 +4,7 @@ import axios from 'axios'
 import camelcase from 'camelcase-keys'
 import classNames from 'classnames'
 import ShowPoster from '../../components/Poster'
+import { Show } from '../../types'
 
 export default () => {
   const [loading, setLoading] = useState(false)
