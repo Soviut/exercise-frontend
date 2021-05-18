@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-import GalleryPage from './pages/gallery'
+import ShowsPage from './pages/shows'
 
 export default () => {
   return (
@@ -25,7 +25,7 @@ export default () => {
             </Route>
 
             <Route path="/gallery/:id?">
-              <GalleryPage />
+              <ShowsPage />
             </Route>
           </Switch>
         </main>
