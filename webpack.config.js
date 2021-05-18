@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlPlugin = require('html-webpack-plugin')
+// const CopyPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -40,16 +41,24 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
+    new HtmlPlugin({
       template: 'index.html',
     }),
+    // new CopyPlugin({
+    //   patterns: [
+    //     {
+    //       from: './images',
+    //       to: 'images',
+    //     },
+    //   ],
+    // }),
     new webpack.HotModuleReplacementPlugin(),
   ],
 
   devtool: 'inline-source-map',
 
   devServer: {
-    contentBase: path.join(__dirname, 'build'),
+    // contentBase: path.join(__dirname, 'build'),
     historyApiFallback: true,
     port: 4000,
     hot: true
