@@ -70,7 +70,7 @@ export default function ShowsPage(): JSX.Element {
 
       <section className="py-32">
         {currentShow && (
-          <Poster show={currentShow} className="max-w-xs mx-auto shadow-lg" />
+          <Poster show={currentShow} className="max-w-xs mx-auto" />
         )}
       </section>
     </div>
