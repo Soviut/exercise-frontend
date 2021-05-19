@@ -1,11 +1,9 @@
 /* eslint @typescript-eslint/no-var-requires: "off" */
 const path = require('path')
-const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
-const CopyPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// const CopyPlugin = require('html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
