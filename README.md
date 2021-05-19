@@ -26,6 +26,34 @@ docker-compose up
 
 Visit [http://localhost:4000](http://localhost:4000)
 
+## Linting
+
+With Docker
+
+```bash
+docker-compose run --rm web yarn run lint
+```
+
+Without Docker
+
+```bash
+yarn run lint
+```
+
+## Testing
+
+With Docker
+
+```bash
+docker-compose run --rm web yarn run test
+```
+
+Without Docker
+
+```bash
+yarn run test
+```
+
 ## Build for Production
 
 To bundle the project for production.
