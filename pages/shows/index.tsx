@@ -37,9 +37,9 @@ export default function ShowsPage(): JSX.Element {
   }, [search, history, shows])
 
   return (
-    <div className="flex flex-col-reverse lg:flex-col">
+    <div className="flex flex-col-reverse lg:flex-col h-screen">
       {/* TODO: turn this into a component if used more than once in future */}
-      <nav className="my-5 bg-gray-200 overflow-x-auto">
+      <nav className="bg-gray-200 overflow-x-auto flex-shrink-0">
         <ul className="whitespace-nowrap text-center space-x-2">
           {shows.map((show) => (
             <li key={show.id} className="inline-block align-top">
@@ -68,10 +68,8 @@ export default function ShowsPage(): JSX.Element {
         </ul>
       </nav>
 
-      <section className="py-32">
-        {currentShow && (
-          <Poster show={currentShow} className="max-w-xs mx-auto" />
-        )}
+      <section className="py-8 flex-grow flex items-center justify-center">
+        {currentShow && <Poster show={currentShow} className="max-w-xs" />}
       </section>
     </div>
   )
