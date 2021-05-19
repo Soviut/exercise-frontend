@@ -1,6 +1,6 @@
 # VICE Front End Coding Exercise
 
-Click [here](./README.md) to view the original specifications for this exercise.
+Click [here](./SPEC.md) to view the original specifications for this exercise.
 ## Installation
 
 Docker is optional but recommended to run everything from a single command line.
