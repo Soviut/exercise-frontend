@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import camelcase from 'camelcase-keys'
@@ -25,8 +25,6 @@ export default function ShowsPage(): JSX.Element {
     fetchShows()
   }, [])
 
-  // remove me!
-
   useEffect(() => {
     const params = new URLSearchParams(search)
     const id = params.get('id')
@@ -37,6 +35,18 @@ export default function ShowsPage(): JSX.Element {
       history.replace({ search: `?id=${show.id}` })
     }
   }, [search, history, shows])
+
+  const showIndex = useMemo<number>(() => {
+    return shows.findIndex((show) => show.id === currentShow?.id)
+  }, [shows, currentShow])
+
+  const prevShow = useMemo<Show | undefined>(() => {
+    return showIndex > 0 ? shows[showIndex - 1] : undefined
+  }, [showIndex])
+
+  const nextShow = useMemo<Show | undefined>(() => {
+    return showIndex < shows.length - 1 ? shows[showIndex + 1] : undefined
+  }, [showIndex])
 
   return (
     <div className="flex flex-col-reverse lg:flex-col h-screen">
@@ -70,7 +80,25 @@ export default function ShowsPage(): JSX.Element {
         </ul>
       </nav>
 
-      <section className="py-8 flex-grow flex items-center justify-center">
+      <section className="relative py-8 flex-grow flex items-center justify-center">
+        {prevShow && (
+          <Link
+            to={{ search: `?id=${prevShow.id}` }}
+            className="absolute left-0 z-10 p-3 bg-black bg-opacity-60 text-white uppercase font-thin"
+          >
+            Prev
+          </Link>
+        )}
+
+        {nextShow && (
+          <Link
+            to={{ search: `?id=${nextShow.id}` }}
+            className="absolute right-0 z-10 p-3 bg-black bg-opacity-60 text-white uppercase font-thin"
+          >
+            Next
+          </Link>
+        )}
+
         {currentShow && <Poster show={currentShow} className="max-w-xs" />}
       </section>
     </div>
