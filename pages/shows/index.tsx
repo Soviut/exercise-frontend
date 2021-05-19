@@ -3,7 +3,7 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import camelcase from 'camelcase-keys'
 import classNames from 'classnames'
-import ShowPoster from '../../components/Poster'
+import Poster from '../../components/Poster'
 import { Show } from '../../types'
 
 export default function ShowsPage(): JSX.Element {
@@ -41,7 +41,7 @@ export default function ShowsPage(): JSX.Element {
   }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div>
+    <div className="flex flex-col-reverse lg:flex-col">
       {/* TODO: turn this into a component if used more than once in future */}
       <nav className="shadow overflow-x-auto">
         {currentShow && (
@@ -75,7 +75,7 @@ export default function ShowsPage(): JSX.Element {
 
       <section className="py-32">
         {currentShow && (
-          <ShowPoster show={currentShow} className="w-72 mx-auto shadow-xl" />
+          <Poster show={currentShow} className="max-w-xs mx-auto shadow-xl" />
         )}
       </section>
     </div>
