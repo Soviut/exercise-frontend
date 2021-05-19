@@ -1,22 +1,87 @@
 # VICE Front End Coding Exercise
 
-Below is a HTML/CSS/JS exercise that involves building out a web component, or single page app, to navigate through various VICE shows.
+Click [here](./README.md) to view the original specifications for this exercise.
+## Installation
 
-- Use HTML5 semantic markup elements.
-- Write your CSS using a preprocessor (Sass).
-- Use React as your JavaScript library and try to avoid using Create React App.
-- Add one or more unit tests using Jest or Mocha/Chai.
-- Bonus: Use a module bundler or task manager such as Webpack to compile static assets. Along with this, include a linter for your code (ESLint, Prettier, ect.).
+Docker is optional but recommended to run everything from a single command line.
 
-## Exercise
-In index.html, rebuild the mocks in the designs folder in semantic HTML, CSS and JS. The designs represent layouts in a smaller screen and a larger screen. It is not 2 pages. Feel free to diverge from the designs and apply your own creativity. The goal is to build a simple UI that allows users to navigate between various shows while displaying the corresponding meta data for each.
+Install [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
-## Specs:
-- There are 10 shows, each with an id, title, episode count, and cover art. (see shows.json).
-- Load the data using AJAX from `http://localhost:3000/shows` (you can start the server up using `yarn start-api`)
-- When landing on the page initially, the first show should be selected.
-- When clicking through the show selector the single show image, title, and episode count also updates.
-- The url updates with the currently selected show. (http://{{page_url}}?id=b2, if second show is selected)
-- A url with http://{{page_url}}?id=b2 should have the second show selected on page reload.
-- When clicking between shows, hitting “Back” and “Forward” on the browser will also update the url, cover image, title, and episode count according to the show id.
-- The minimum width of the screen is 320px. The horizontal breakpoint is at 980px. Build with a mobile first approach.
+**NOTE:** All `docker-compose` commands are to be run from the project root.
+
+Build the images from our Dockerfiles. This process will take a
+few moments the first time but subsequent builds will be much faster.
+
+```bash
+docker-compose build --parallel
+```
+
+## Development
+
+To start the dev server.
+
+```bash
+docker-compose up
+```
+
+Visit [http://localhost:4000](http://localhost:4000)
+
+## Build for Production
+
+To bundle the project for production.
+
+```bash
+docker-compose run --rm web yarn run build
+```
+
+This will produce a `/build` directory with an index.html and related resources.
+
+## Decisions and Rationale
+### Docker
+
+Docker was used to build a container that perfectly matched the node engine
+version requirement in the package.json. Docker Compose was used to serve the
+main app and the api at the same time, but in separate containers.
+
+### Typescript
+
+There are some clearly defined data types such as "shows" that get passed around
+a lot so opting in to some strict typing made sense.
+
+### Parcel, Then Webpack
+
+Parcel is a handy "no configuration" build tool that can get many modern web
+frameworks up and running very quickly. Unfortunately, certain project
+requirements exceeded the capabilities of Parcel so it was replaced with
+Webpack 5.
+
+### Tailwind and PostCSS
+
+Tailwind, which relies on PostCSS, was used in place of SASS. This saves time by
+having a flexible, well documented design system ready, instead of building a
+custom one from scratch. The new "just in time" JIT compiler was used to
+dramatically speed up the class aggregation across the source files.
+
+### Page Components
+
+The Nuxt/Next pattern of dedicated page components was used since it is well
+documented and top level components are rarely embedded in anything but the app.
+
+### Sparse components
+
+The decision was made to use components for repetition, not encapsulation. This
+keeps component nesting hiearchies shallow, requiring fewer open files to get
+and overview of a page's structure.
+
+### Remote Fonts
+
+In order to keep Webpack configuration to a minimum, the web font is sourced
+remotely from Google's CDNs in the css file.
+
+### Static Images Hack
+
+The images directory needs to be copied to the build, rather than bundled.
+The copy-webpack-plugin was conflicting so a quick hack was added to the build
+script in package.json to copy the files after the build. This solution will
+not work in Windows because it relies on bash commands but this shouldn't be a
+problem when running in Docker.
