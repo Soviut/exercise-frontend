@@ -19,12 +19,12 @@ export default function Poster({
       <figcaption className="absolute bottom-0 w-full p-3 text-center bg-black bg-opacity-60 backdrop-blur-xl">
         <div
           role="episodes"
-          className="text-xs font-bold uppercase text-gray-400"
+          className="text-sm mb-1 font-bold uppercase text-gray-300"
         >
           {show.episodes} Episodes
         </div>
 
-        <h2 role="title" className="text-xl font-bold uppercase text-white">
+        <h2 role="title" className="text-3xl font-thin uppercase text-white">
           {show.title}
         </h2>
       </figcaption>
