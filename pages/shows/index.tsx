@@ -15,8 +15,7 @@ export default function ShowsPage(): JSX.Element {
 
   // TODO: refactor to use suspense once out of beta
   useEffect(() => {
-    // prettier-ignore
-    (async () => {
+    const fetchShows = async () => {
       // setLoading(true)
 
       // TODO: centralize axios config for base url
@@ -27,10 +26,12 @@ export default function ShowsPage(): JSX.Element {
       console.log(data)
 
       setShows(data)
+      // TODO: fallback case when there is no id
       setCurrentShow(data.find((show: Show) => show.id === id))
 
       // setLoading(false)
-    })()
+    }
+    fetchShows()
   }, [id])
 
   return (
@@ -38,31 +39,37 @@ export default function ShowsPage(): JSX.Element {
       {/* TODO: turn this into a component if used more than once in future */}
       <nav className="shadow overflow-x-auto">
         {currentShow && (
-          <ul className="flex justify-center flex-nowrap space-x-8">
+          <ul className="flex items-center">
             {shows.map((show) => (
-              <li key={show.id}>
+              <li key={show.id} className="py-12 px-12 flex-shrink-0">
                 <Link
                   to={{ pathname: show.id }}
-                  className={classNames(
-                    'block flex-shrink-0 w-16 h-16',
-                    show.id === currentShow.id ? 'bg-black' : 'bg-gray-200'
-                  )}
+                  className="w-16 h-16 block relative"
                 >
-                  <span className="sr-only">{show.title}</span>
-                </Link>
+                  <img
+                    src={show.productImageUrl}
+                    className={classNames(
+                      'w-16 h-16 object-cover',
+                      show.id !== currentShow.id &&
+                        'filter grayscale contrast-50 opacity-40'
+                    )}
+                  />
 
-                {show.id === currentShow.id && (
-                  <div className="text-center">{show.episodes}</div>
-                )}
+                  {show.id === currentShow.id && (
+                    <div className="absolute -bottom-2 -right-2 py-1 px-2 h-8 w-8 text-center bg-black text-white">
+                      {show.episodes}
+                    </div>
+                  )}
+                </Link>
               </li>
             ))}
           </ul>
         )}
       </nav>
 
-      <section>
+      <section className="py-32">
         {currentShow && (
-          <ShowPoster show={currentShow} className="w-72 mx-auto" />
+          <ShowPoster show={currentShow} className="w-72 mx-auto shadow-xl" />
         )}
       </section>
     </div>

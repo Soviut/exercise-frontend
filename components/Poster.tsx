@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import { Show } from '../types'
 
@@ -12,10 +13,10 @@ export default function Poster({
   className,
 }: ShowPosterProps): JSX.Element {
   return (
-    <figure className={className}>
+    <figure className={classNames(className, 'relative')}>
       <img src={show.productImageUrl} className="w-full" />
 
-      <figcaption className="text-center">
+      <figcaption className="absolute bottom-0 w-full p-3 text-center bg-black bg-opacity-60 backdrop-blur-xl">
         <div
           role="episodes"
           className="text-xs font-bold uppercase text-gray-400"
@@ -23,7 +24,7 @@ export default function Poster({
           {show.episodes} Episodes
         </div>
 
-        <h2 role="title" className="text-xl font-bold uppercase">
+        <h2 role="title" className="text-xl font-bold uppercase text-white">
           {show.title}
         </h2>
       </figcaption>
