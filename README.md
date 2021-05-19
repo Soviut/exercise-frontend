@@ -36,6 +36,21 @@ docker-compose run --rm web yarn run build
 
 This will produce a `/build` directory with an index.html and related resources.
 
+To test the build files, start a simple http server pointing at the build
+directory.
+
+```bash
+npx http-server ./build
+```
+
+Next, start just the backend
+
+```bash
+docker-comopose up backend
+```
+
+Visit [http://localhost:8080](http://localhost:8080)
+
 ## Decisions and Rationale
 ### Docker
 
@@ -72,6 +87,11 @@ documented and top level components are rarely embedded in anything but the app.
 The decision was made to use components for repetition, not encapsulation. This
 keeps component nesting hiearchies shallow, requiring fewer open files to get
 and overview of a page's structure.
+
+### Happy Path Only
+
+For reasons of time, edge cases such as the backend being offline or no shows
+in the data are not being handled.
 
 ### Remote Fonts
 
