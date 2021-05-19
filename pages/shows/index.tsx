@@ -42,11 +42,11 @@ export default function ShowsPage(): JSX.Element {
 
   const prevShow = useMemo<Show | undefined>(() => {
     return showIndex > 0 ? shows[showIndex - 1] : undefined
-  }, [showIndex])
+  }, [shows, showIndex])
 
   const nextShow = useMemo<Show | undefined>(() => {
     return showIndex < shows.length - 1 ? shows[showIndex + 1] : undefined
-  }, [showIndex])
+  }, [shows, showIndex])
 
   return (
     <div className="flex flex-col-reverse lg:flex-col h-screen">
