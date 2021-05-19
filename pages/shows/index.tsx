@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import camelcase from 'camelcase-keys'
 import classNames from 'classnames'
@@ -10,29 +10,35 @@ export default function ShowsPage(): JSX.Element {
   // const [loading, setLoading] = useState(false)
   const [shows, setShows] = useState<Show[]>([])
   const [currentShow, setCurrentShow] = useState<Show | undefined>()
+  const hist = useHistory()
 
   const { id }: { id: string | undefined } = useParams()
 
-  // TODO: refactor to use suspense once out of beta
-  useEffect(() => {
-    const fetchShows = async () => {
-      // setLoading(true)
+  async function fetchShows() {
+    // setLoading(true)
 
-      // TODO: centralize axios config for base url
-      const res = await axios('http://localhost:3000/shows')
+    // TODO: refactor into a useResrouce with with axios base url config
+    const res = await axios('http://localhost:3000/shows')
 
-      // normalize JSON snake case to camel case to avoid mixing styles
-      const data: Show[] = camelcase(res.data)
-      console.log(data)
+    // normalize JSON snake case to camel case to avoid mixing styles
+    const data: Show[] = camelcase(res.data)
 
+    if (data.length > 0) {
       setShows(data)
-      // TODO: fallback case when there is no id
-      setCurrentShow(data.find((show: Show) => show.id === id))
 
-      // setLoading(false)
+      // choose first show if no id is present
+      const show = id ? data.find((show: Show) => show.id === id) : data[0]
+      if (show) {
+        setCurrentShow(show)
+        hist.replace({ pathname: `/gallery/${show.id}` })
+      }
     }
+    // setLoading(false)
+  }
+
+  useEffect(() => {
     fetchShows()
-  }, [id])
+  }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>
