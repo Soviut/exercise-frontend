@@ -25,6 +25,8 @@ export default function ShowsPage(): JSX.Element {
     fetchShows()
   }, [])
 
+  // remove me!
+
   useEffect(() => {
     const params = new URLSearchParams(search)
     const id = params.get('id')

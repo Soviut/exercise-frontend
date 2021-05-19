@@ -3,18 +3,15 @@ const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
-// const CopyPlugin = require('html-webpack-plugin')
-const tailwindcss = require('tailwindcss')
-const autoprefixer = require('autoprefixer')
 
 module.exports = {
   mode: 'development',
 
+  entry: './index.tsx',
+
   output: {
     publicPath: '/',
   },
-
-  entry: './index.tsx',
 
   module: {
     rules: [
@@ -54,18 +51,10 @@ module.exports = {
     new ESLintPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx'],
     }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: './images',
-    //       to: 'images',
-    //     },
-    //   ],
-    // }),
     new webpack.HotModuleReplacementPlugin(),
   ],
 
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
 
   devServer: {
     // contentBase: path.join(__dirname, 'build'),
