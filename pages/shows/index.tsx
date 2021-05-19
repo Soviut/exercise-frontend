@@ -7,38 +7,31 @@ import Poster from '../../components/Poster'
 import { Show } from '../../types'
 
 export default function ShowsPage(): JSX.Element {
-  // const [loading, setLoading] = useState(false)
   const [shows, setShows] = useState<Show[]>([])
   const [currentShow, setCurrentShow] = useState<Show | undefined>()
-  const hist = useHistory()
+  const history = useHistory()
 
   const { id }: { id: string | undefined } = useParams()
 
-  async function fetchShows() {
-    // setLoading(true)
+  useEffect(() => {
+    async function fetchShows() {
+      const res = await axios('http://localhost:3000/shows')
 
-    // TODO: refactor into a useResrouce with with axios base url config
-    const res = await axios('http://localhost:3000/shows')
-
-    // normalize JSON snake case to camel case to avoid mixing styles
-    const data: Show[] = camelcase(res.data)
-
-    if (data.length > 0) {
+      // normalize JSON snake case to camel case to avoid mixing styles
+      const data: Show[] = camelcase(res.data)
       setShows(data)
-
-      // choose first show if no id is present
-      const show = id ? data.find((show: Show) => show.id === id) : data[0]
-      if (show) {
-        setCurrentShow(show)
-        hist.replace({ pathname: `/gallery/${show.id}` })
-      }
     }
-    // setLoading(false)
-  }
+
+    fetchShows()
+  }, [])
 
   useEffect(() => {
-    fetchShows()
-  }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
+    const show = shows.find((show: Show) => show.id === id) || shows[0]
+    if (show) {
+      setCurrentShow(show)
+      history.replace({ pathname: `/gallery/${show.id}` })
+    }
+  }, [id, history, shows])
 
   return (
     <div className="flex flex-col-reverse lg:flex-col">
