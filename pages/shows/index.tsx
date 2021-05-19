@@ -39,7 +39,7 @@ export default function ShowsPage(): JSX.Element {
   return (
     <div className="flex flex-col-reverse lg:flex-col h-screen">
       {/* TODO: turn this into a component if used more than once in future */}
-      <nav className="bg-gray-500 overflow-x-auto flex-shrink-0">
+      <nav className="bg-gray-700 overflow-x-auto flex-shrink-0">
         <ul className="whitespace-nowrap text-center space-x-2">
           {shows.map((show) => (
             <li key={show.id} className="inline-block align-top">
@@ -53,7 +53,7 @@ export default function ShowsPage(): JSX.Element {
                     'w-full h-full object-cover',
                     currentShow &&
                       show.id !== currentShow.id &&
-                      'opacity-30 mix-blend-luminosity'
+                      'opacity-40 mix-blend-luminosity'
                   )}
                 />
 
