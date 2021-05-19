@@ -2,7 +2,14 @@ module.exports = {
   darkMode: 'class',
 
   mode: 'jit',
-  purge: ['./**/*.{html,js,jsx,ts,tsx}'],
+  purge: {
+    content: [
+      'index.{html,tsx}',
+      'App.tsx',
+      'pages/**/*.{ts,tsx}',
+      'components/**/*.{ts,tsx}',
+    ],
+  },
 
   theme: {
     extend: {},

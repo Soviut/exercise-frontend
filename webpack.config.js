@@ -1,8 +1,11 @@
-import webpack from 'webpack'
-import HtmlPlugin from 'html-webpack-plugin'
-import ForkTsCheckerPlugin from 'fork-ts-checker-webpack-plugin'
-import ESLintPlugin from 'eslint-webpack-plugin'
-// import CopyPlugin from 'html-webpack-plugin'
+/* eslint @typescript-eslint/no-var-requires: "off" */
+const webpack = require('webpack')
+const HtmlPlugin = require('html-webpack-plugin')
+const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
+// const CopyPlugin = require('html-webpack-plugin')
+const tailwindcss = require('tailwindcss')
+const autoprefixer = require('autoprefixer')
 
 module.exports = {
   mode: 'development',
