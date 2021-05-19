@@ -40,33 +40,32 @@ export default function ShowsPage(): JSX.Element {
     <div className="flex flex-col-reverse lg:flex-col">
       {/* TODO: turn this into a component if used more than once in future */}
       <nav className="shadow overflow-x-auto">
-        {currentShow && (
-          <ul className="flex items-center">
-            {shows.map((show) => (
-              <li key={show.id} className="py-12 px-12 flex-shrink-0">
-                <Link
-                  to={{ search: `?id=${show.id}` }}
-                  className="w-16 h-16 block relative"
-                >
-                  <img
-                    src={show.productImageUrl}
-                    className={classNames(
-                      'w-16 h-16 object-cover',
+        <ul className="flex items-center">
+          {shows.map((show) => (
+            <li key={show.id} className="py-12 px-12 flex-shrink-0">
+              <Link
+                to={{ search: `?id=${show.id}` }}
+                className="w-16 h-16 block relative"
+              >
+                <img
+                  src={show.productImageUrl}
+                  className={classNames(
+                    'w-16 h-16 object-cover',
+                    currentShow &&
                       show.id !== currentShow.id &&
-                        'filter grayscale contrast-50 opacity-40'
-                    )}
-                  />
-
-                  {show.id === currentShow.id && (
-                    <div className="absolute -bottom-2 -right-2 py-1 px-2 h-8 w-8 text-center bg-black text-white">
-                      {show.episodes}
-                    </div>
+                      'filter grayscale contrast-50 opacity-40'
                   )}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+                />
+
+                {currentShow && show.id === currentShow.id && (
+                  <div className="absolute -bottom-2 -right-2 py-1 px-2 h-8 w-8 text-center bg-black text-white">
+                    {show.episodes}
+                  </div>
+                )}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </nav>
 
       <section className="py-32">
