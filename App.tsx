@@ -7,7 +7,7 @@ export default function App(): JSX.Element {
   return (
     <Router>
       <div>
-        <main className="container mx-auto">
+        <main>
           <Switch>
             <Route exact path="/">
               <ShowsPage />

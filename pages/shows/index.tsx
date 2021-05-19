@@ -39,26 +39,26 @@ export default function ShowsPage(): JSX.Element {
   return (
     <div className="flex flex-col-reverse lg:flex-col">
       {/* TODO: turn this into a component if used more than once in future */}
-      <nav className="shadow overflow-x-auto">
-        <ul className="flex items-center">
+      <nav className="my-5 bg-gray-200 overflow-x-auto">
+        <ul className="whitespace-nowrap text-center space-x-2">
           {shows.map((show) => (
-            <li key={show.id} className="py-12 px-12 flex-shrink-0">
+            <li key={show.id} className="inline-block align-top">
               <Link
                 to={{ search: `?id=${show.id}` }}
-                className="w-16 h-16 block relative"
+                className="w-24 h-24 block relative"
               >
                 <img
                   src={show.productImageUrl}
                   className={classNames(
-                    'w-16 h-16 object-cover',
+                    'w-full h-full object-cover',
                     currentShow &&
                       show.id !== currentShow.id &&
-                      'filter grayscale contrast-50 opacity-40'
+                      'filter grayscale opacity-40'
                   )}
                 />
 
                 {currentShow && show.id === currentShow.id && (
-                  <div className="absolute -bottom-2 -right-2 py-1 px-2 h-8 w-8 text-center bg-black text-white">
+                  <div className="absolute bottom-0 right-0 py-1 px-2 h-8 w-8 text-center bg-black text-white">
                     {show.episodes}
                   </div>
                 )}
@@ -70,7 +70,7 @@ export default function ShowsPage(): JSX.Element {
 
       <section className="py-32">
         {currentShow && (
-          <Poster show={currentShow} className="max-w-xs mx-auto shadow-xl" />
+          <Poster show={currentShow} className="max-w-xs mx-auto shadow-lg" />
         )}
       </section>
     </div>
