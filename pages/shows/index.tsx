@@ -57,12 +57,12 @@ export default function ShowsPage(): JSX.Element {
             <li key={show.id} className="inline-block align-top">
               <Link
                 to={{ search: `?id=${show.id}` }}
-                className="w-24 h-24 block relative"
+                className="group w-24 h-24 block relative overflow-hidden"
               >
                 <img
                   src={show.productImageUrl}
                   className={classNames(
-                    'w-full h-full object-cover',
+                    'w-full h-full object-cover transform group-hover:scale-110 group-focus:scale-110 transition-transform duration-300',
                     currentShow &&
                       show.id !== currentShow.id &&
                       'opacity-40 mix-blend-luminosity'
@@ -84,18 +84,22 @@ export default function ShowsPage(): JSX.Element {
         {prevShow && (
           <Link
             to={{ search: `?id=${prevShow.id}` }}
-            className="absolute left-0 z-10 p-3 bg-black bg-opacity-60 text-white uppercase font-thin"
+            className="group absolute left-0 z-10 overflow-hidden"
           >
-            Prev
+            <div className="p-3 pl-5 bg-black bg-opacity-60 text-white uppercase font-thin transform -translate-x-2 group-hover:translate-x-0 group-focus:translate-x-0 transition-transform duration-100">
+              Prev
+            </div>
           </Link>
         )}
 
         {nextShow && (
           <Link
             to={{ search: `?id=${nextShow.id}` }}
-            className="absolute right-0 z-10 p-3 bg-black bg-opacity-60 text-white uppercase font-thin"
+            className="group absolute right-0 z-10 overflow-hidden"
           >
-            Next
+            <div className="p-3 pr-5 bg-black bg-opacity-60 text-white uppercase font-thin transform translate-x-2 group-hover:translate-x-0 group-focus:translate-x-0 transition-transform duration-100">
+              Next
+            </div>
           </Link>
         )}
 
