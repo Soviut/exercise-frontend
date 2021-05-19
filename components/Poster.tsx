@@ -16,7 +16,7 @@ export default function Poster({
     <figure className={classNames(className, 'relative')}>
       <img src={show.productImageUrl} className="w-full" />
 
-      <figcaption className="absolute bottom-0 w-full p-3 text-center bg-black bg-opacity-60 backdrop-blur-xl">
+      <figcaption className="absolute bottom-0 w-full p-3 text-center bg-black bg-opacity-60">
         <div
           role="episodes"
           className="text-sm mb-1 font-bold uppercase text-gray-300"
