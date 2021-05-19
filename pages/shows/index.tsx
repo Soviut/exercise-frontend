@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams, useHistory } from 'react-router-dom'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import camelcase from 'camelcase-keys'
 import classNames from 'classnames'
@@ -11,7 +11,7 @@ export default function ShowsPage(): JSX.Element {
   const [currentShow, setCurrentShow] = useState<Show | undefined>()
   const history = useHistory()
 
-  const { id }: { id: string | undefined } = useParams()
+  const { search }: { search: string } = useLocation()
 
   useEffect(() => {
     async function fetchShows() {
@@ -26,12 +26,15 @@ export default function ShowsPage(): JSX.Element {
   }, [])
 
   useEffect(() => {
+    const params = new URLSearchParams(search)
+    const id = params.get('id')
     const show = shows.find((show: Show) => show.id === id) || shows[0]
+
     if (show) {
       setCurrentShow(show)
-      history.replace({ pathname: `/gallery/${show.id}` })
+      history.replace({ search: `?id=${show.id}` })
     }
-  }, [id, history, shows])
+  }, [search, history, shows])
 
   return (
     <div className="flex flex-col-reverse lg:flex-col">
@@ -42,7 +45,7 @@ export default function ShowsPage(): JSX.Element {
             {shows.map((show) => (
               <li key={show.id} className="py-12 px-12 flex-shrink-0">
                 <Link
-                  to={{ pathname: show.id }}
+                  to={{ search: `?id=${show.id}` }}
                   className="w-16 h-16 block relative"
                 >
                   <img
