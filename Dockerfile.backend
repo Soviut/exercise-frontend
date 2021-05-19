@@ -3,7 +3,7 @@ FROM node:12.14.1-alpine
 WORKDIR /src
 
 COPY ./package* ./
-RUN yarn install
+RUN yarn add -D json-server
 
 COPY ./shows.json .
 
